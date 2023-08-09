@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@model Message2
+
+<h1>Mesaj Detay Sayfası</h1>
+<br />
+<div class="mb-3">
+    <label class="form-label">Mesaj ID</label>
+    <label class="form-control">@Model.MessageId</label>
+</div>
+<div class="mb-3">
+    <label class="form-label">Gönderen</label>
+    <label class="form-control">@Model.SenderUser.WriterName</label>
+</div>
+<div class="mb-3">
+    <label class="form-label">Mesaj Başlığı</label>
+    <label class="form-control">@Model.Subject</label>
+</div>
+<div>
+    <label class="form-label">Mesaj İçeriği</label>
+    <textarea disabled class="bg-white form-control" rows="15">
+        @Model.MessageDetails
+    </textarea>
+</div>

@@ -1,0 +1,36 @@
+﻿
+
+<div class="tech-btm">
+    <h4>Mail Bültenine abone olun</h4>
+    <p>Teknoloji, yazılım ve diğer bloglar...</p>
+    <input id="email" type="email" placeholder="Email" required="">
+    <input onclick="sendEmail()" type="submit" value="Abone Ol">
+</div>
+
+
+
+<script>
+
+    function sendEmail() {
+        const email = $('#email').val();
+        console.log("email", email)
+        $.ajax({
+            method: 'POST',
+            url: '/NewsLetter/SubscribeMail',
+            data: JSON.stringify(email),
+            contentType: 'application/json',
+
+            success: function (response) {
+                if (response.success) {
+                    alert(response.message);
+                } else {
+                    alert('İşlem başarısız');
+                }
+            },
+            error: function () {
+                alert('Bir hata oluştu');
+            }
+
+        });
+    }
+</script>

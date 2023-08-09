@@ -1,0 +1,41 @@
+﻿<div class=tech-btm>
+    <p>Teknoloji, yazılım ve diğer bloglar...</p>
+    <input id=email type=email placeholder=Email required= />
+    <input onclick=sendEmail() type=submit value=Abone Ol />
+</div>
+
+
+
+
+<script>
+    function sendEmail() {
+        const email = $('#email').val();
+
+        var NewsLetterModel = {
+            Mail: email
+        }
+
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("SubscribeMail", "NewsLetter")',
+            data: NewsLetterModel,
+            dataType: 'json',
+
+            success:function(response) {
+                if (response.success) {
+                    $('#email').val('');
+                    alert(response.message);
+                } else {
+                    alert('Email formatında giriniz.');
+                }
+            },
+            error:function() {
+                alert('Bir hata oluştu');
+            }
+
+        });
+
+    }
+</script>
+
+

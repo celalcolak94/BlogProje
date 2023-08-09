@@ -1,0 +1,182 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@model List<Blog>
+
+<div class="banner">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="carousel-caption">
+                    <h3>
+                        Create the lifestyle
+                        <span>you desire</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="carousel-item item2">
+                <div class="carousel-caption">
+                    <h3>
+                        Engaging Purposeful
+                        <span>and Creative</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="carousel-item item3">
+                <div class="carousel-caption">
+                    <h3>
+                        Create the lifestyle
+                        <span>you desire</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="carousel-item item4">
+                <div class="carousel-caption">
+                    <h3>
+                        Engaging Purposeful
+                        <span>and Creative</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<section class="bottom-slider">
+    <div class="course_demo1">
+        <ul id="flexiselDemo1">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="blog-item">
+                        <img src="/BlogImageFiles/@item.BlogImage" alt=" " class="img-fluid" />
+
+                        <div class="floods-text">
+                            <h3>
+                                <a class="text-white" asp-controller="Blog" asp-action="BlogReadAll" asp-route-id="@item.BlogId">@item.BlogTitle</a>
+                                <span>
+                                    Yazar
+                                    <label>|</label>
+                                    <i>@item.Writer.WriterName</i>
+                                </span>
+                            </h3>
+
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+
+<section class="middle-sec-agileinfo-w3ls">
+    <div class="container">
+        <h1 class="text-white">Son 4 Post</h1>
+        <div class="row inner-sec">
+            <div class="col-md-4 news-left">
+                <ul id="demo1_thumbs" class="list-inline">
+                    @foreach (var item in (List<Blog>)@ViewBag.Last4Blog)
+                    {
+                        <li>
+                            <a href="/BlogImageFiles/@item.BlogImage">
+                                <img src="/BlogImageFiles/@item.BlogImage" alt="" data-desoslide-caption="<h3>Latest Post 1</h3>">
+                                <div class="mid-text-info">
+                                    <h4>@item.BlogTitle</h4>
+                                    <p>@item.Category.CategoryName</p>
+                                    <div class="sub-meta">
+                                        <span>
+                                            <i class="far fa-clock"></i>
+                                            @item.BlogCreateDate.ToShortDateString()
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div id="demo1_main_image" class="col-md-8  news-right"></div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+    <!-- desoslide-JavaScript -->
+    <script src="/BlogTema/js/jquery.desoslide.js"></script>
+    <script>
+        $('#demo1_thumbs').desoSlide({
+            main: {
+                container: '#demo1_main_image',
+                cssClass: 'img-responsive'
+            },
+            effect: 'sideFade',
+            caption: true
+        });
+    </script>
+
+    <!-- requried-jsfiles-for owl -->
+    <script>
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel({
+                visibleItems: 3,
+                animationSpeed: 1000,
+                autoPlay: true,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+
+        });
+    </script>
+    <script src="/BlogTema/js/jquery.flexisel.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+
+
+            $().UItoTop({
+                easingType: 'easeOutQuart'
+            });
+
+        });
+    </script>
+}

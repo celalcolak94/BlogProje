@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@model List<Blog>
+
+<body>
+    <section class="banner-bottom">
+        <!--/blog-->
+        <div class="container">
+            <div class="row">
+                <!--left-->
+                <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="blog-grid-top">
+                            <div class="b-grid-top">
+                                <div class="blog_info_left_grid">
+                                    <img src="/BlogImageFiles/@item.BlogImage" class="img-fluid" alt="" style="width:100%;">
+                                </div>
+                                <div class="blog-info-middle">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-calendar-alt"></i>
+                                                @item.BlogCreateDate.ToLongDateString()
+                                            </a>
+                                        </li>
+                                        <li class="mx-2">
+                                            <a href="#">
+                                                <i class="far fa-thumbs-up"></i>
+                                                0 Likes
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="far fa-comment"></i>
+                                                @ViewBag.Comments Yorum
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>
+                                @item.BlogTitle
+                            </h3>
+                            <p>
+                                @item.BlogContent
+                            </p>
+                            <a asp-controller="Blog" asp-action="Index" class="btn btn-primary read-m">Blog Listesi</a>
+                        </div>
+                    }
+
+                    @if (Model.Count > 0)
+                    {
+                        @await Component.InvokeAsync("CommentListByBlog", new {id = ViewBag.Id})
+                    }
+
+                    @if (Model.Count > 0)
+                    {
+                        @await Component.InvokeAsync("CommentAdd", new {id = ViewBag.Id})
+                    }
+
+                </div>
+
+                <!--//left-->
+                <!--right-->
+                <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+                    <div class="right-blog-info text-left">
+                        <div class="tech-btm">
+                            <img src="/BlogTema/images/banner1.jpg" class="img-fluid" alt="">
+                        </div>
+
+                        <h4>Mail Bültenine abone olun</h4>
+                        @await Html.PartialAsync("/Views/NewsLetter/SubscribeMail.cshtml")
+
+                        @await Component.InvokeAsync("CategoryList")
+
+                        @if (Model.Count > 0)
+                        {
+                            @await Component.InvokeAsync("WriterLastBlog", new {id = ViewBag.WriterId})
+                        }
+
+                        <div class="single-gd tech-btm">
+                            <h4>Son Eklenen Post</h4>
+                            <div class="blog-grids">
+                                <div class="blog-grid-left">
+                                    <a asp-action="BlogReadAll" asp-route-id="@ViewBag.LastPostId">
+                                        <img src="/BlogImageFiles/@ViewBag.LastPostImage" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                                <div class="blog-grid-right">
+
+                                    <h5>
+                                        <a asp-action="BlogReadAll" asp-route-id="@ViewBag.LastPostId">@ViewBag.LastPostTitle</a>
+                                    </h5>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </aside>
+                <!--//right-->
+            </div>
+        </div>
+    </section>
+
+</body>

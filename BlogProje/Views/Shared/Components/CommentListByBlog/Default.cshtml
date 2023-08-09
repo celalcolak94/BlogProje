@@ -1,0 +1,32 @@
+﻿@model List<Comment>
+
+
+
+<div class="comment-top">
+    <h4>Yorumlar</h4>
+    @if (Model.Count == 0)
+    {
+        <h5>Bu blogda henüz yorum yapılmadı, ilk yorumu siz yapın.</h5>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <div class="media">
+                @if (@item.WriterId is not null)
+                {
+                    <img src="/WriterImageFiles/@item.Writer.WriterImage" alt="" class="img-fluid" style="height:90px; width:90px;" />
+                }else
+                {
+                    <img src="/WriterImageFiles/CommentMisafir.png" alt="" class="img-fluid" style="height:90px; width:90px;" />
+                }
+                <div class="media-body">
+                    <h5 class="mt-0">@item.CommentUserName</h5>
+                    <p>
+                        @item.CommentContent
+                    </p>
+                </div>
+            </div>
+        }
+    }
+</div>

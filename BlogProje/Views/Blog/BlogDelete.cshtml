@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "BlogDelete";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@model Blog
+
+<form asp-controller="Blog" asp-action="BlogDelete" method="post">
+    <div class="card-body">
+        <h1 class="card-title">Kayıt Silme İşlemi</h1>
+        <input asp-for="BlogId" type="hidden" value="@Model.BlogId"/>
+        <p class="card-text"><b>@Model.BlogTitle</b> isimli kayıtı silmek istediğinize emin misiniz?</p>
+        <button class="btn btn-danger" type="submit">Sil</button>
+        <a asp-action="BlogListByWriter" class="btn btn-primary">Vazgeç</a>
+    </div>
+</form>

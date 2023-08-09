@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "BlogUpdate";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@model BlogModel
+
+<h1>Blog Düzenleme Sayfası</h1>
+<hr />
+<form asp-controller="Blog" asp-action="BlogUpdate" method="post" enctype="multipart/form-data">
+    <input asp-for="BlogId" value="@Model.BlogId" type="hidden"/>
+    <div class="mb-3">
+        <label for="title" class="form-label">Blog Başlığı</label>
+        <input asp-for="BlogTitle" type="text" class="form-control" id="title" placeholder="Blog başlığı giriniz.">
+        <span class="text-danger" asp-validation-for="BlogTitle"></span>
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Blog İçerik</label>
+        <textarea asp-for="BlogContent" class="form-control" id="content" rows="3" placeholder="Blok içeriği giriniz."></textarea>
+        <span class="text-danger" asp-validation-for="BlogContent"></span>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Blog Görseli</label>
+        <input asp-for="BlogImage" type="file" class="form-control" id="image" placeholder="Fotoğraf giriniz.">
+        <span class="text-danger" asp-validation-for="BlogImage"></span>
+    </div>
+    <div class="mb-3">
+        <select asp-for="CategoryId" class="form-select !import" aria-label="Default select example">
+            @foreach (var item in (List<Category>)ViewBag.Categories)
+            {
+                <option value="@item.CategoryId">@item.CategoryName</option>
+            }
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-info">Blog Güncelle</button>
+    </div>
+</form>

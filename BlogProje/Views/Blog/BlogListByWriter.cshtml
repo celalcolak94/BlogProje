@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+@model List<Blog>
+
+<h1>Yazarın Blogları</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Blog Başlığı</th>
+            <th>Güncellenme Tarihi</th>
+            <th>Kategori</th>
+            <th>Durum</th>
+            <th>Sil</th>
+            <th>Düzenle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BlogId</td>
+                <td>@item.BlogTitle</td>
+                <td>@item.BlogCreateDate.ToShortDateString()</td>
+                <td>@item.Category.CategoryName</td>
+                @if (item.BlogStatus)
+                {
+                    <td>Aktif</td>
+                }else
+                {
+                    <td>Pasif</td>
+                }
+                <td>
+                    <a asp-controller="Blog" asp-action="BlogDelete" asp-route-id="@item.BlogId" class="btn btn-danger">Sil</a>
+                </td>
+                <td>
+                    <a asp-controller="Blog" asp-action="BlogUpdate" asp-route-id="@item.BlogId" class="btn btn-warning">Düzenle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Blog" asp-action="BlogAdd" class="btn btn-primary">
+    Yeni Blog Oluştur
+</a>

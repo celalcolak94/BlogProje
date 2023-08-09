@@ -1,0 +1,75 @@
+﻿
+@model Writer
+
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                    <img src="/WriterImageFiles/@Model.WriterImage" alt="profile">
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">@Model.WriterName</span>
+                    <span class="text-secondary text-small">@Model.WriterAbout</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Writer" asp-action="WriterEditProfile" class="nav-link">
+                <span class="menu-title">Profilim</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Blog" asp-action="BlogListByWriter" class="nav-link">
+                <span class="menu-title">Bloglarım</span>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Blog" asp-action="BlogAdd" class="nav-link">
+                <span class="menu-title">Yeni Blog</span>
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Message" asp-action="InBox" class="nav-link">
+                <span class="menu-title">Mesajlar</span>
+                <i class="mdi mdi-message menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Notification" asp-action="AllNotification" class="nav-link">
+                <span class="menu-title">Bildirimler</span>
+                <i class="mdi mdi-call-merge menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Blog" asp-action="Index" class="nav-link">
+                <span class="menu-title">Siteye Git</span>
+                <i class="mdi mdi-car menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Writer" asp-action="WriterEditProfile" class="nav-link">
+                <span class="menu-title">Ayarlar</span>
+                <i class="mdi mdi-settings menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Login" asp-action="LogOut" class="nav-link">
+                <span class="menu-title">Çıkış Yap</span>
+                <i class="mdi mdi-logout-variant menu-icon"></i>
+            </a>
+        </li>
+    </ul>
+</nav>

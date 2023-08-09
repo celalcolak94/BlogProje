@@ -1,0 +1,60 @@
+﻿@model List<Writer>
+
+<div class="comment-top">
+    <h4>Bir yorum yapın</h4>
+    <div class="comment-bottom">
+        <input id="blogid" type="hidden" value="@ViewBag.BlogId" />
+        @if (Model.Count > 0)
+        {
+            <input disabled id="name" value="@Model.FirstOrDefault().WriterName" class="form-control" type="text" placeholder="Adınız Soyadınız" required="">
+            <input id="writerid" type="hidden" value="@Model.FirstOrDefault().WriterId" />
+        }
+        else
+        {
+            <input id="name" class="form-control" type="text" placeholder="Adınız Soyadınız" required="">
+        }
+        <input id="title" class="form-control" type="text" placeholder="Konu" required="">
+        <textarea id="content" class="form-control" placeholder="Yorumunuz..." required=""></textarea>
+        <button onclick="addComment()" class="btn btn-primary sumbit">Yorum Yap</button>
+    </div>
+</div>
+
+<script>
+    function addComment() {
+        const username = $('#name').val();
+        const title = $('#title').val();
+        const content = $('#content').val();
+        const blogid = $('#blogid').val();
+        const writerid = $('#writerid').val();
+
+        var Comment = {
+            CommentUserName: username,
+            CommentTitle: title,
+            CommentContent: content,
+            BlogId: blogid,
+            WriterId: writerid
+        }
+
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("PartialAddComment", "Comment")',
+            data: Comment,
+            dataType: 'json',
+
+            success: function (response) {
+                if (response.success) {
+                    $('#name').val('');
+                    $('#title').val('');
+                    $('#content').val('');
+                    alert(response.message);
+                } else {
+                    alert('Email formatında giriniz.');
+                }
+            },
+
+            error: function () {
+                alert('Bir hata oluştu');
+            }
+        });
+    }
+</script>
